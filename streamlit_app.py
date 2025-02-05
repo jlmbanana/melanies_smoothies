@@ -47,6 +47,9 @@ if ingredients_list:
     for fruit_chosen in ingredients_list:
        ingredients_string += fruit_chosen + ' '
 
+       #API info: 
+       smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+       sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     #SQL insert statement
     my_insert_statement = """insert into smoothies.public.orders(ingredients, NAME_ON_ORDER)
@@ -64,8 +67,6 @@ if ingredients_list:
         st.success('Your Smoothie is ordered, ' + name_on_order + '!', icon="✅")
 
 
-###API: get info from the smoothiefroot website
+
 smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-#st.text(smoothiefroot_response.json())
-#Put json info into df object:
 sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)

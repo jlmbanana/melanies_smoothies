@@ -1,5 +1,10 @@
 # Import python packages
 import streamlit as st
+import requests  #NEW FOR API CONNECT
+
+###API: get info from the smoothiefroot website
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+st.text(smoothiefroot_response)
 
 from snowflake.snowpark.functions import col, when_matched
 #Commented out for SniS---
@@ -60,4 +65,4 @@ if ingredients_list:
         session.sql(my_insert_statement).collect()
         st.success('Your Smoothie is ordered, ' + name_on_order + '!', icon="✅")
 
-#st.write(session)
+

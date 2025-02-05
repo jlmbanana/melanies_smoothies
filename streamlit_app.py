@@ -2,9 +2,7 @@
 import streamlit as st
 import requests  #NEW FOR API CONNECT
 
-###API: get info from the smoothiefroot website
-smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
-st.text(smoothiefroot_response.json())
+
 
 from snowflake.snowpark.functions import col, when_matched
 #Commented out for SniS---
@@ -66,3 +64,8 @@ if ingredients_list:
         st.success('Your Smoothie is ordered, ' + name_on_order + '!', icon="✅")
 
 
+###API: get info from the smoothiefroot website
+smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+#st.text(smoothiefroot_response.json())
+#Put json info into df object:
+sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)

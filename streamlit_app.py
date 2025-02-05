@@ -1,6 +1,7 @@
 # Import python packages
 import streamlit as st
 import requests  #NEW FOR API CONNECT
+import pandas as pd
 
 
 

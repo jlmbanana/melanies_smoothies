@@ -56,13 +56,13 @@ if ingredients_list:
        
        #Code is getting row wwhere fruit_chosen equals what is in FRUIT_NAME column. Then get the value of Search_ON & save into variable
        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-       st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+       # st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
         
         #Add subheader to output
        st.subheader(fruit_chosen + ' Nutrition Information')
        
         #API info: 
-       smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + fruit_chosen)
+       smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/" + search_on)
        sf_df = st.dataframe(data=smoothiefroot_response.json(), use_container_width=True)
 
     #SQL insert statement

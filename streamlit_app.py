@@ -32,8 +32,8 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT
 
 #Convert the snowpark df to pandas df, so we can use the LOC function
 pd_df = my_dataframe.to_pandas()
-st.dataframe(pd_df)
-st.stop()
+#st.dataframe(pd_df)
+#st.stop()
 
 #Put a multiselect widget on app
 ingredients_list = st.multiselect(
@@ -41,19 +41,23 @@ ingredients_list = st.multiselect(
     my_dataframe,
     max_selections=5
 )
-
+###############################################################
 # Test if anything is in the list. If list NOT NULL, write it
     #Create string to hold fruits
-    # iterate through ingredients and dump fruits into the string.
+    # iterate through ingredients and concat each fruit into the string.
     # Build the SQL insert statement
-
+##################################################################
 if ingredients_list:
     
     ingredients_string = ''
 
     for fruit_chosen in ingredients_list:
        ingredients_string += fruit_chosen + ' '
-       #Add subheader to output
+       
+       search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+       st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+        
+        #Add subheader to output
        st.subheader(fruit_chosen + ' Nutrition Information')
        
         #API info: 
